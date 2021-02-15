@@ -224,6 +224,8 @@ The explosion sprite sheet was downloaded from [assetsdownload.com](https://asse
 
 The "cow" sound effect was downloaded from [freesound.org](https://freesound.org/people/Robinhood76/sounds/61277/)
 
+The "narwhal" sound was downloaded from [freesound.org](https://freesound.org/people/Augdog/sounds/201231/)
+
 The other assets were downloaded from [kenney.nl](https://kenney.nl/assets)
 
 
