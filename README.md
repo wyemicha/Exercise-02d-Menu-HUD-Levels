@@ -59,8 +59,8 @@ func update_score(s):
 	global.score += s
 	$Score.text = "Score: " + str(global.score)
 	if global.score >= 100 and global.level != 2:
-		get_node("/root/Game/Level").show()
-		get_node("/root/Game/Level").monitoring = true
+		global.level = 2
+		get_tree().change_scene("res://Level/Level2.tscn")
 
 func update_health(h):
 	global.health += h
@@ -72,23 +72,7 @@ func update_health(h):
 
 ## Changing levels and Level 2
 
- * Select the Level node. In the Inspector, uncheck Monitoring. Select the Node panel (the tab next to the Inspector panel)->Signals. Double-click on the body_entered signal and select Level (Connecting from). Replace the Level.gd script with the following: 
-
- ```
-extends Area2D
-
-onready var global = get_node("/root/Global")
-
-func _on_Level_body_entered(body):
-	global.level = 2
-	get_tree().change_scene("res://Level/Level2.tscn")
-
- ```
-
-* Save the changes.
-
 * In the Scene menu, select Save Scene As…. Save it as res://Level/Level2.tscn
-* In the new Level2 scene, right-click on the Level node and select Delete Node(s). Confirm that you want to delete it
 * Next to the Enemies node, click on the script icon. Viewing Enemies.gd in the Script Workspace, File->Save As… res://Enemies/Enemies2.gd
 * Change line 3 of Enemies2.gd to: `onready var Enemy = load("res://Enemy/Enemy2.tscn")
 * In the Scene menu, Open Scene. Open res://Enemy/Enemy.tscn
