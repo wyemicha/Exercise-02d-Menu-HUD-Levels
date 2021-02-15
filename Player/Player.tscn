@@ -1,0 +1,53 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Player/Player.gd" type="Script" id=1]
+[ext_resource path="res://Assets/player.png" type="Texture" id=2]
+[ext_resource path="res://Player/Laser.gd" type="Script" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 17.7289, 31.6387 )
+
+[sub_resource type="CircleShape2D" id=2]
+
+[node name="Player" type="KinematicBody2D"]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="player" type="Sprite" parent="."]
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 2 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+scale = Vector2( 0.2, 0.2 )
+polygon = PoolVector2Array( 13.5, -148.5, 13.5, -146.2, 20.5, -138.3, 20.5, -136, 29.5, -116.9, 29.5, -112.5, 37.5, -81.8, 37.5, 29.5, 78.5, 92.9, 78.5, 106.5, 77.6, 106.5, 38.4, 117, 20.7, 154.5, -21.7, 154.5, -37.8, 118.5, -40.8, 118.5, -78.5, 107.6, -78.5, 92.9, -38.5, 32.9, -38.5, -82.8, -26, -129.5, -24.7, -129.5, -17.8, -144.5, -16.4, -144.5, -7.5, -154.2, 5.5, -154.5 )
+
+[node name="Damage" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Damage"]
+shape = SubResource( 1 )
+
+[node name="Laser" type="RayCast2D" parent="."]
+position = Vector2( 0, -35 )
+enabled = true
+cast_to = Vector2( 0, 0 )
+collision_mask = 2
+script = ExtResource( 3 )
+
+[node name="Target" type="Area2D" parent="Laser"]
+monitoring = false
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Laser/Target"]
+shape = SubResource( 2 )
+
+[node name="Line2D" type="Line2D" parent="Laser"]
+points = PoolVector2Array( 0, 0, 0, 0 )
+width = 3.0
+default_color = Color( 0.454902, 0.752941, 0.988235, 1 )
+[connection signal="body_entered" from="Damage" to="." method="_on_Damage_body_entered"]
+[connection signal="body_entered" from="Laser/Target" to="Laser" method="_on_Target_body_entered"]

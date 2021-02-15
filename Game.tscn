@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Assets/starfield.webm" type="VideoStream" id=1]
+[ext_resource path="res://Assets/Background.gd" type="Script" id=2]
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Assets/cow.wav" type="AudioStream" id=4]
+[ext_resource path="res://Enemy/Enemies.gd" type="Script" id=8]
+
+[node name="Game" type="Node2D"]
+
+[node name="Background" type="VideoPlayer" parent="."]
+margin_left = -23.0
+margin_top = -16.0
+margin_right = 1053.0
+margin_bottom = 609.0
+stream = ExtResource( 1 )
+autoplay = true
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Player_Container" type="Node2D" parent="."]
+
+[node name="Player" parent="Player_Container" instance=ExtResource( 3 )]
+position = Vector2( 512, 550 )
+
+[node name="Enemies" type="Node2D" parent="."]
+script = ExtResource( 8 )
+
+[node name="Timer" type="Timer" parent="Enemies"]
+autostart = true
+
+[node name="Explosions" type="Node2D" parent="."]
+
+[node name="Cow" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+[connection signal="finished" from="Background" to="Background" method="_on_Background_finished"]
+[connection signal="timeout" from="Enemies/Timer" to="Enemies" method="_on_Timer_timeout"]
