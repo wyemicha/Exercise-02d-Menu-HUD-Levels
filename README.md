@@ -73,6 +73,7 @@ func update_health(h):
 ## Changing levels and Level 2
 
 * In the Scene menu, select Save Scene As…. Save it as res://Level/Level2.tscn
+* Change the name of the Cow node to Narwhal. Select it, and drag Assets/narwhal.wav from the FileSystem panel to the Stream property in the Inspector panel.
 * Next to the Enemies node, click on the script icon. Viewing Enemies.gd in the Script Workspace, File->Save As… res://Enemies/Enemies2.gd
 * Change line 3 of Enemies2.gd to: `onready var Enemy = load("res://Enemy/Enemy2.tscn")
 * In the Scene menu, Open Scene. Open res://Enemy/Enemy.tscn
@@ -89,6 +90,7 @@ export var points = 10
 export var damage = 50
 
 onready var Explosion = load("res://Explosion/Explosion.tscn")
+onready var Sound = get_node("/root/Game/Narwhal")
 
 
 func _physics_process(delta):
@@ -103,6 +105,7 @@ func die():
 	explosion.position = position
 	get_node("/root/Game/Explosions").add_child(explosion)
 	explosion.get_node("Animation").play()
+	Sound.play()
 	queue_free()
 ```
 * Again, in the Scene menu, Save Scene As… res://Enemy/Enemy2.tscn
