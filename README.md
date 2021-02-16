@@ -82,8 +82,6 @@ func update_health(h):
 ```
 extends KinematicBody2D
 
-onready var HUD = get_node("/root/Game/HUD")
-
 export var speed = Vector2(0,3)
 export var health = 100
 export var points = 10
@@ -165,7 +163,7 @@ func _on_Quit_pressed():
 ```
 
  * Save the scene as res://Menu/Die.tscn
- * Finally, open the Player.gd script. Replace the contents of the script with the following:
+ * We are almost done. Open the Player.gd script. Replace the contents of the script with the following:
  ```
 extends KinematicBody2D
 
@@ -195,6 +193,18 @@ func _on_Damage_body_entered(body):
 	HUD.update_health(-body.damage)
 	body.die()
  ```
+
+ * Now open Enemy.gd. After the extends statement (line 3), add
+ ```
+ onready var HUD = get_node("/root/Game/HUD")
+ ```
+ * and then as the first line of the die() function (now-line 21), add
+ ```
+ HUD.update_score(points)
+ ```
+ (making sure you have indented appropriately.
+ 
+ * Make the same two changes to Enemy2.gd.
 
 Test the game. You should be able to start the game, go to the second level, and then see the end-game screen when the health goes to zero.
 
