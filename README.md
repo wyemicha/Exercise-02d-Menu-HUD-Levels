@@ -170,14 +170,14 @@ func _on_Quit_pressed():
 extends KinematicBody2D
 
 onready var HUD = get_node("/root/Game/HUD")
-export var speed = 2
+export var speed = 7
 
 
 func _physics_process(delta):
 	position += get_input()*speed
 	if Input.is_action_pressed("shoot") and not $Laser.is_casting:
-		$Laser.fire(get_viewport().get_mouse_position())
-	elif $Laser.is_casting:
+		$Laser.fire(Vector2(global_position.x, 0))
+	elif not Input.is_action_pressed("shoot") and $Laser.is_casting:
 		$Laser.stop()
 	
 
