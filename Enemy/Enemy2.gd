@@ -7,7 +7,7 @@ export var points = 10
 export var damage = 50
 
 onready var Explosion = load("res://Explosion/Explosion.tscn")
-onready var Sound = get_node("/root/Game/Cow")
+onready var Sound = get_node("/root/Game/Narwhal")
 
 
 func _physics_process(delta):
